@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 TRANSACTION_TYPE = (
@@ -12,8 +13,8 @@ class Account(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
-    cart_number = models.IntegerField()
-    balance = models.IntegerField()
+    cart_number = models.IntegerField(unique=True, validators=[MinValueValidator(1)])
+    balance = models.IntegerField(validators=[MinValueValidator(0)], default=0)
 
     class Meta:
         ordering = ['-id']
@@ -26,7 +27,7 @@ class Transaction(models.Model):
     transaction_type = models.CharField(max_length=20,
                                         choices=TRANSACTION_TYPE,
                                         default=TRANSACTION_TYPE[0][0])
-    amount = models.IntegerField()
+    amount = models.IntegerField(validators=[MinValueValidator(1)])
     date = models.DateTimeField(auto_now_add=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
