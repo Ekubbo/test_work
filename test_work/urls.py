@@ -20,5 +20,4 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rest_api/', include('bonus_account.urls'))
-    # path('accounts/', ListAccounts.as_view(), name='accounts'),
 ]
