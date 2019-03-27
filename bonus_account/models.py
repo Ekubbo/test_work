@@ -20,7 +20,7 @@ class Account(models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return "{} {}".format(self.last_name, self.first_name)
 
 
 class Transaction(models.Model):
